@@ -22,7 +22,7 @@ void convolution(int *image,int *kernel,int image_width, int image_height, int k
 
                 }
             }
-            *(image + (image_width*i) + j) = sum/kernel_normalizer;
+            *(image + (image_width*i) + j) = (sum/kernel_normalizer);
             
         }
     }

@@ -44,4 +44,4 @@ def convolution(image,kernel,kernel_normalizer) :
     '''
     REMOVE BORDER FROM IMAGE
     '''
-    return image_c_array
+    return numpy.ascontiguousarray(image_c_array,dtype=numpy.uint8)

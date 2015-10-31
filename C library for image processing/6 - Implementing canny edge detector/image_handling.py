@@ -1,6 +1,4 @@
-import libconvolution
 import numpy
-import matplotlib
 import matplotlib.pyplot as plt
 import locate_file
 
@@ -31,10 +29,5 @@ def read_image(image_name) :
     harmless_image = convert_to_harmless_image(plt.imread(working_directory + image_name))
     return(rgb_to_grayscale(harmless_image))
 
-image = read_image('sample_image_3.png')
-
-kernel = [1,[[-1,0,1],[-1,0,1],[-1,0,1]]]
-kernel_normalizer = 9
-
-c_image = libconvolution.convolution(image,kernel[1],1)
-plt.imshow(c_image,cmap=matplotlib.pyplot.get_cmap('gray'))
+def display_image(image) : 
+    plt.imshow(image,cmap=plt.get_cmap('gray'))

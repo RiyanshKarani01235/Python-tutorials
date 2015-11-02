@@ -93,7 +93,34 @@ def sobel_operator(image) :
     _image_processing_.sobel_operator(image_c_array,magnitude,angle,\
         image_width,image_height)
 
-    return[numpy.ascontiguousarray(magnitude,dtype=numpy.int32),\
+    return [numpy.ascontiguousarray(magnitude,dtype=numpy.int32),\
     angle.astype('B')]
 
 '''--------------------------------------------------------------------'''
+
+
+
+'''-----------------------------------------------------------------------
+------------------------- NON MAXIMUM SUPRESSION -------------------------
+-----------------------------------------------------------------------'''
+
+_image_processing_.non_maximum_supression.argtypes = [two_d_array_,\
+    two_d_array_,two_d_array_,ctypes.c_int,ctypes.c_int]
+_image_processing_.non_maximum_supression.restypes = ctypes.c_void_p
+
+def non_maximum_supression(magnitude,angle) :
+    
+    #----------------- VARIABLE DECLARATIONS -------------------
+    image_height = len(magnitude)
+    image_width = len(magnitude[0])
+    #-----------------------------------------------------------
+
+    magnitude_c_array = numpy.ascontiguousarray(magnitude,dtype=numpy.int32)
+    angle_c_array = numpy.ascontiguousarray(angle,dtype=numpy.int32)
+    return_image_c_array = numpy.ctypeslib.as_array(((ctypes.c_int*image_width)*image_height)())
+
+    _image_processing_.non_maximum_supression(magnitude_c_array,angle_c_array,return_image_c_array,image_width,image_height)
+
+    return return_image_c_array
+
+'''---------------------------------------------------------------------'''

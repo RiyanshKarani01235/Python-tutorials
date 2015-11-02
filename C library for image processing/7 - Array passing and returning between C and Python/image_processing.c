@@ -10,7 +10,7 @@
 #define absolute(number) ((number^(number>>31)) + ((number>>31)&1))
 void convolution(int *image,int *return_image,int *kernel,int image_width, int image_height, int kernel_size, int kernel_normalizer);
 void sobel_operator(int *image,int *magnitude,int *angle,int image_width,int image_height);
-int quantize(int number);
+int quantize(double number);
 
 /*------------------------------------------------------------------------
 ------------------------------ CONVOLUTION -------------------------------
@@ -89,13 +89,13 @@ void sobel_operator(int *image,int *magnitude,int *angle,int image_width,int ima
             based convolution*/
             *(magnitude + (image_width*(i+border_width)) + j+border_width) =   (absolute(sum_x) + absolute(sum_y));
             *(angle + (image_width*(i+border_width)) + j+border_width) = 
-                quantize((int)atan2(sum_y,sum_x)*val);
+                quantize(atan2(sum_y,sum_x)*val);
         }
     }
 
 }
 
-int quantize(int number) {
+int quantize(double number) {
 
     //all upper and lower limits will be rounded up
     int zero_l1[2] = {-22,22};
@@ -113,7 +113,7 @@ int quantize(int number) {
     }
     else if(((number > fortyfive_l1[0])&&(number < fortyfive_l1[1]))||
             ((number > fortyfive_l2[0])&&(number < fortyfive_l2[1]))) {
-                return 135;
+                return 45;
     }
 
     else if(((number > ninety_l1[0])&&(number < ninety_l1[1]))||
@@ -122,6 +122,6 @@ int quantize(int number) {
     }
 
     else {
-                return 45;
+                return 135;
     }
 }

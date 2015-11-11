@@ -39,7 +39,7 @@ _image_processing_.convolution.argtypes = [two_d_array_,two_d_array_,\
 two_d_array_,ctypes.c_int,ctypes.c_int,ctypes.c_int,ctypes.c_int]
 _image_processing_.convolution.restype = ctypes.c_void_p
 
-def convolution(image,kernel,convert_to_uint8=True) :
+def convolution(image,kernel,convert_to_uint8=False) :
 
     #----------------------- VARIABLE DECLARATIONS ---------------------
     image_height = len(image)
